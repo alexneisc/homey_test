@@ -16,12 +16,26 @@
   <% end %>
 </div>
 
+<div class="mt-10">
+  <%= form_for(@comment) do |form| %>
+    <%= form.text_area(:body, rows: 4, placeholder: "Your comment", class: "mb-3 rounded border border-gray-200 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" ) %>
+    <div>
+      <%= form.submit class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    </div>
+    <%= form.hidden_field(:project_id, value: @project.id) %>
+  <% end %>
+</div>
+
   <table class="table-auto border-collapse border border-gray-400 my-10">
     <tbody>
-    <% @project.history.each do |history_item| %>
+    <% @project.histories.order(created_at: :desc).each do |history_item| %>
       <tr>
         <td class="border border-gray-100 p-2 pl-2 dark:border-gray-700">
-          Status changed to <span class="items-center px-2 py-1 font-sans text-xs font-bold text-green-900 rounded-md select-none whitespace-nowrap bg-green-500/20"><%= history_item.status %></span>
+          <% if history_item.its_comment == 1 %>
+            Comment: <%= history_item.body %>
+          <% else %>
+            Status changed to <span class="items-center px-2 py-1 font-sans text-xs font-bold text-green-900 rounded-md select-none whitespace-nowrap bg-green-500/20"><%= history_item.body %></span>
+          <% end %>
         </td>
         <td class="border border-gray-100 p-2 pl-2 dark:border-gray-700">
           <%= history_item.user.email %>
