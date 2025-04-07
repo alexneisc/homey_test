@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root "projects#index"
 
-  resources :projects, only: [:index, :show]
+  resources :projects, only: [:index, :show, :edit, :update]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

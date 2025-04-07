@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[ show ]
+  before_action :set_project, only: %i[ show edit update ]
 
   def index
     @projects = Project.all
