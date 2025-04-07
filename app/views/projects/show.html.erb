@@ -16,14 +16,20 @@
   <% end %>
 </div>
 
-<div>
-  <table class="table-auto border-collapse border border-gray-400">
+  <table class="table-auto border-collapse border border-gray-400 my-10">
     <tbody>
-    <% @project.history do |history_item| %>
+    <% @project.history.each do |history_item| %>
       <tr>
-        <td class="border-b border-gray-100 p-4 pl-4 dark:border-gray-700"><%= history_item.status %></td>
+        <td class="border border-gray-100 p-2 pl-2 dark:border-gray-700">
+          Status changed to <span class="items-center px-2 py-1 font-sans text-xs font-bold text-green-900 rounded-md select-none whitespace-nowrap bg-green-500/20"><%= history_item.status %></span>
+        </td>
+        <td class="border border-gray-100 p-2 pl-2 dark:border-gray-700">
+          <%= history_item.user.email %>
+        </td>
+        <td class="border border-gray-100 p-2 pl-2 dark:border-gray-700">
+          <%= history_item.created_at %>
+        </td>
       </tr>
     <% end %>
     </tbody>
   </table>
-</div>
