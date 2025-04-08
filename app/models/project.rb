@@ -3,7 +3,7 @@
 class Project < ApplicationRecord
   include Projects::ActsAsStateMachine
 
-  has_many :status_histories
-  has_many :comments
+  has_many :status_histories, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :histories
 end
